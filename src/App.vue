@@ -1,22 +1,29 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <FamilyMovieList/>
-    <ComedyMovieList/>
+    <ListsMovies title="List movies of Comedy" v-bind:movie="comedyMovies"/>
+    <ListsMovies title="List movies of Family" v-bind:movie="familyMovies"/>
   </div>
 </template>
 
 <script>
-import ComedyMovieList from './components/ComedyMovieList.vue'
-import FamilyMovieList from './components/FamilyMovieList.vue'
+import ListsMovies from './components/ListsMovies.vue'
 
 export default {
   name: 'App',
   components: {
-    ComedyMovieList,
-    FamilyMovieList
+    ListsMovies
+  },
+  computed: {
+    comedyMovies() {
+      return this.$store.state.movies.filter(movie => movie.genre === "Comedy");
+    },
+    familyMovies() {
+      return this.$store.state.movies.filter(movie => movie.genre === "Family");
+    }
   }
 }
+//hola
 </script>
 
 <style>
